@@ -1,0 +1,15 @@
+set(INI_SRC
+    ${CMAKE_CURRENT_SOURCE_DIR}/renaini.cpp
+PARENT_SCOPE)
+
+set(FORMATEXT_SRC
+    ${CMAKE_CURRENT_SOURCE_DIR}/formatext.cpp
+PARENT_SCOPE)
+
+set(SHELL_MAIN
+    ${CMAKE_CURRENT_SOURCE_DIR}/shell/shell.cpp
+PARENT_SCOPE)
+
+set(SHELLEXT_SRC
+    ${CMAKE_CURRENT_SOURCE_DIR}/shell/commandlist.cpp
+PARENT_SCOPE)
