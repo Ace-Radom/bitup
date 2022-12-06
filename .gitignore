@@ -1,0 +1,6 @@
+build
+debug
+release
+
+test.*
+*.code-workspace
