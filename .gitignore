@@ -1,6 +1,8 @@
 build
 debug
 release
+log
 
+*.log
 test.*
 *.code-workspace
