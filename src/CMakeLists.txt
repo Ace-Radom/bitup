@@ -1,4 +1,4 @@
-set(INI_SRC
+set(RENAINI_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/renaini.cpp
 PARENT_SCOPE)
 
@@ -12,4 +12,9 @@ PARENT_SCOPE)
 
 set(SHELLEXT_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/shell/commandlist.cpp
+PARENT_SCOPE)
+
+set(RENALOG_SRC
+    ${CMAKE_CURRENT_SOURCE_DIR}/renalog_core.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/renalog_read.cpp
 PARENT_SCOPE)
