@@ -3,11 +3,9 @@ project(bitup VERSION 1.0)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_FLAGS_DEBUG -g)
-set(CMAKE_CXX_FLAGS_RELEASE -O2 -DNDEBUG)
 
 set(BUILD_DEBUG ON)
-set(BUILD_TEST  OFF)
+set(BUILD_TEST  ON)
 
 if(${BUILD_DEBUG})
 
@@ -42,6 +40,14 @@ add_library(renalog SHARED
     ${RENALOG_SRC}
 )
 
+add_library(fdiropext SHARED
+    ${FILE_OPERATION_SRC}
+)
+
+add_library(hash4cxx SHARED
+    ${HASH_SRC}
+)
+
 add_executable(bitup_shell
     ${SHELL_MAIN}
 )
@@ -59,6 +65,7 @@ if(${BUILD_TEST})
 
     target_link_libraries(test
         renalog
+        hash4cxx
     )
 
 endif()
