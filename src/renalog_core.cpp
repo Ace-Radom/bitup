@@ -47,10 +47,18 @@ errno_t rena::renalog::open( std::string __log_title ){
     logfile_path_now = log_folder_path + "/" + logfile_name;
     // link log folder path to get the log file path
 
-    File.open( logfile_path_now , std::ios::out );
+    struct stat buf;
+    if ( stat( logfile_path_now.c_str() , &buf ) == 0 ) // log file already existed
+    {
+        File.open( logfile_path_now , std::ios::out | std::ios::app );
+    }
+    else
+    {
+        File.open( logfile_path_now , std::ios::out );
+    }
+
     if ( !File.is_open() )
     {
-        std::cout << "error!" << std::endl;
         return L_OPENLOGFILEERROR;
     }
     return L_OK;
@@ -69,9 +77,12 @@ void rena::renalog::close(){
  * @brief write infos to log
  * 
  * @param __lt log type
+ * @param __from info's creator's sign
  * @param __info info to write
  */
-void rena::renalog::write( lt __lt , std::string __info ){
+void rena::renalog::log( lt __lt , std::string __from , std::string __info ){
+    delete_colon_in_info_from( __from );
+    
     switch ( __lt ){
         case lt::INFO:
             File << "[INFO    ";
@@ -94,10 +105,22 @@ void rena::renalog::write( lt __lt , std::string __info ){
     strftime( tmc , sizeof( tmc ) , "%Y.%m.%d %H:%M:%S",localtime( &time_now ) );
     // change time into char in format
 
-    File << tmc << get_microsecondsnow() << "]: " << __info;
+    File << tmc << get_microsecondsnow();
     // also add microsecond here
+    File << "]" << __from << ": " << __info;
+    // write info from
 
     File << std::endl;
+    return;
+}
+
+/**
+ * @brief add comment into log file
+ * 
+ * @param __info comment info
+ */
+void rena::renalog::comment( std::string __info ){
+    File << "# " << __info << std::endl;
     return;
 }
 
@@ -168,4 +191,15 @@ std::string rena::renalog::get_parent_folder_from_path( std::string __path ){
     }
 
     return parentpath;
+}
+
+void rena::renalog::delete_colon_in_info_from( std::string& __from ){
+    for ( int i = 0 ; i < __from.size() ; i++ )
+    {
+        if ( __from[i] == ':' )
+        {
+            __from[i] = ' ';
+        }
+    }
+    return;
 }

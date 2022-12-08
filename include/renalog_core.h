@@ -12,6 +12,7 @@
 #include<sstream>
 #include<list>
 #include<vector>
+#include<sys/stat.h>
 
 #define L_OK 0x00
 #define L_OPENLOGFILEERROR -( 0x01 )
@@ -37,7 +38,8 @@ namespace rena {
             errno_t open( std::string );
             void close();
 
-            void write( lt , std::string );
+            void log( lt , std::string , std::string );
+            void comment( std::string );
             void wrap();
 
         // data members:
@@ -47,16 +49,18 @@ namespace rena {
 
             time_t time_now;
 
-        // file stream members:
+        // file stream member:
         protected:
             std::fstream File;
 
         // functional functions:
         private:
             std::string get_microsecondsnow();
-            
+
             void create_parent_folder( std::string );
             std::string get_parent_folder_from_path( std::string );
+
+            void delete_colon_in_info_from( std::string& );
 
     }; // class renalog
 
