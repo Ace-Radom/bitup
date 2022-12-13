@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 14)
 
 set(BUILD_DEBUG ON)
-set(BUILD_TEST  ON)
+set(BUILD_TEST  OFF)
 
 if(${BUILD_DEBUG})
 
@@ -23,6 +23,13 @@ endif()
 
 include_directories(include)
 add_subdirectory(src)
+
+find_package(OpenSSL REQUIRED)
+include_directories(${OPENSSL_INCLUDE_DIR})
+
+find_package(Python3 REQUIRED
+             COMPONENTS Interpreter Development)
+include_directories(${Python3_INCLUDE_DIRS})
 
 add_library(renaini SHARED
     ${RENAINI_SRC}
@@ -66,6 +73,9 @@ if(${BUILD_TEST})
     target_link_libraries(test
         renalog
         hash4cxx
+        OpenSSL::Crypto
+        OpenSSL::SSL
+        ${Python3_LIBRARIES}
     )
 
 endif()
