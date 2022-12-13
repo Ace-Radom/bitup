@@ -23,5 +23,7 @@
 #include"sha1.hpp"
 #include"sha224.hpp"
 #include"sha256.hpp"
+#include"sha384.hpp"
+#include"sha512.hpp"
 
 #endif
