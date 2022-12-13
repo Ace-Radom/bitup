@@ -10,7 +10,7 @@ int main(){
     std::string readin;
 
     std::cout << "==================================================================" << "\n"
-              << "===                         bitup V1.0                         ===" << "\n"
+              << "===                         bitup v1.0                         ===" << "\n"
               << "===     Project Source: https://github.com/Ace-Radom/bitup     ===" << "\n"
               << "===   For more infos please visit this project's Github site   ===" << "\n"
               << "===        Still in developing, thanks for your support        ===" << "\n"
