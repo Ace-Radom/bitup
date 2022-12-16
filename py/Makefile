@@ -32,6 +32,8 @@ COPY = cp
 # copy file
 RD = rm -rf
 # remove dir
+DEL = rm
+# delete files
 PATH_SEPARATOR = /
 
 endif
