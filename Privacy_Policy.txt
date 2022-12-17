@@ -1,0 +1,28 @@
+            bitup project privacy policy
+               Version 1, Dec 17 2022
+
+The usage and operational logic of bitup dictates that 
+it must collect the necessary data on your computer to 
+ensure the proper functioning of the program. 
+Data collection always leads to privacy problems. I do
+respect your privacy, and here is the privacy policy.
+
+  1. bitup only collects the following datas:
+     - your files which need to be backuped by bitup
+     - these files' paths, which maybe contain some of
+       your personal infomation
+     - system settings, including:
+       - system type (Windows, Linux, etc.)
+       - system time
+     All of these datas will only be saved locally.
+
+  2. bitup only connects to the Internet when checking
+     available updates from Github. It will not upload
+     any datas to the Internet.
+
+  3. bitup never uploads datas. All hash calculations,
+     files backup, and other things bitup does will be
+     done locally, and log files will only be saved on
+     your computer.
+
+                                    bitup develop team
