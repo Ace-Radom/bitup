@@ -1,6 +1,7 @@
 build
 debug
 release
+release_package
 log
 
 *.log
