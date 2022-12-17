@@ -32,3 +32,7 @@ set(HASH_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/hash/sha384.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/hash/sha512.cpp
 PARENT_SCOPE)
+
+set(PY_EXT_SRC
+    ${CMAKE_CURRENT_SOURCE_DIR}/PyAPI_Encapsulation.cpp
+PARENT_SCOPE)
