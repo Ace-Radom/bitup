@@ -12,13 +12,9 @@ PYTHON = python
 PYTHON_FLAG = -m py_compile
 
 ifeq (${PYTHON_FLAG},-m py_compile)
-
 PYTHON_COMPILED_FILE_FE = pyc
-
 else
-
 PYTHON_COMPILED_FILE_FE = pyo
-
 endif
 # filename extension for python compiled file (.pyc or .pyo)
 
@@ -31,7 +27,6 @@ DEL = del /q
 # delete files
 PATH_SEPARATOR = \\
 
-PATH_BEGIN = .${PATH_SEPARATOR}
 endif
 # under Windows
 
@@ -62,8 +57,8 @@ build:
 	@${PYTHON} ${PYTHON_FLAG} ${GUI}.py
 	@echo [ 2/${TARGET_NUM}] Compiling python target: ${GUI}
 
-	@${COPY} ${PATH_BEGIN}__pycache__${PATH_SEPARATOR}${HASHFILE}.${PYTHON_EDITION}.${PYTHON_COMPILED_FILE_FE} .${PATH_SEPARATOR}${HASHFILE}.${PYTHON_COMPILED_FILE_FE}
-	@${COPY} ${PATH_BEGIN}__pycache__${PATH_SEPARATOR}${GUI}.${PYTHON_EDITION}.${PYTHON_COMPILED_FILE_FE} .${PATH_SEPARATOR}${GUI}.${PYTHON_COMPILED_FILE_FE}
+	@${COPY} __pycache__${PATH_SEPARATOR}${HASHFILE}.${PYTHON_EDITION}.${PYTHON_COMPILED_FILE_FE} ${HASHFILE}.${PYTHON_COMPILED_FILE_FE}
+	@${COPY} __pycache__${PATH_SEPARATOR}${GUI}.${PYTHON_EDITION}.${PYTHON_COMPILED_FILE_FE} ${GUI}.${PYTHON_COMPILED_FILE_FE}
 
 clean:
 	@${RD} __pycache__
