@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 14)
 
 set(BUILD_DEBUG OFF)
-set(BUILD_TEST  OFF)
+set(BUILD_TEST  ON)
 
 set(MAKE_COMMAND mingw32-make)
 
@@ -25,11 +25,24 @@ else()
 endif()
 
 find_package(OpenSSL REQUIRED)
+if(NOT OpenSSL_FOUND)
+    message(FATAL "OpenSSL Not Found")
+endif()
 include_directories(${OPENSSL_INCLUDE_DIR})
 
 find_package(Python3 REQUIRED
              COMPONENTS Interpreter Development)
+if(NOT Python3_FOUND)
+    message(FATAL "Python3 Not Found")
+endif()
 include_directories(${Python3_INCLUDE_DIRS})
+
+find_package(Boost REQUIRED
+             COMPONENTS system filesystem thread)
+if(NOT Boost_FOUND)
+    message(FATAL "Boost Not Found")
+endif()
+include_directories(${BOOST_INCLUDE_DIRS})
 
 include_directories(include)
 add_subdirectory(src)
@@ -66,9 +79,14 @@ add_executable(bitup_shell
     ${SHELL_MAIN}
 )
 
-add_custom_command(TARGET pyapi
+add_custom_command(
+    TARGET      pyapi
     POST_BUILD
-    COMMAND ${MAKE_COMMAND} -C ${PROJECT_SOURCE_DIR}/py
+    COMMAND     ${MAKE_COMMAND} -C ${PROJECT_SOURCE_DIR}/py
+)
+
+target_link_libraries(fdiropext
+    Boost::filesystem
 )
 
 target_link_libraries(bitup_shell
@@ -87,6 +105,7 @@ if(${BUILD_TEST})
     )
 
     target_link_libraries(test
+        fdiropext
         renalog
         hash4cxx
         pyapi
@@ -127,6 +146,7 @@ if(NOT ${BUILD_DEBUG})
         FILES
             ${CMAKE_SOURCE_DIR}/LICENSE
             ${CMAKE_SOURCE_DIR}/Privacy_Policy.txt
+            ${CMAKE_SOURCE_DIR}/README.md
         DESTINATION
             .
     )
