@@ -2,6 +2,8 @@
 
 const size_t rena::buffer_size = 1024 * 1024; // buffer size as 1 Mb
 
+#ifndef BOOST_FILESYSTEM_FILESYSTEM_HPP
+
 /**
  * @brief copy one file
  * 
@@ -49,4 +51,28 @@ errno_t rena::copyfile( std::string __from , std::string __to ){
 
     return F_OK;
 }
+
+#else
+
+/**
+ * @brief copy one file
+ * 
+ * @param __from source file path
+ * @param __to target path
+ * 
+ * @note require boost::filesystem
+ */
+errno_t rena::copyfile( std::string __from , std::string __to ){
+    boost::filesystem::path from( __from );
+    boost::filesystem::path to( __to );
+    if ( !boost::filesystem::exists( from ) )
+    {
+        return F_READERROR;
+    }
+
+    boost::filesystem::copy( from , to );
+    return F_OK;
+}
+
+#endif
 
